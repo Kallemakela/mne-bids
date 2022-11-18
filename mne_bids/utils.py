@@ -70,6 +70,7 @@ def _get_ch_type_mapping(fro='mne', to='bids'):
                        temperature='TEMP',
                        # NIRS
                        fnirs_cw_amplitude='NIRSCWAMPLITUDE',
+                       fnirs_od='NIRSCWOPTICALDENSITY',
                        # MEG channels
                        meggradaxial='MEGGRADAXIAL', megmag='MEGMAG',
                        megrefgradaxial='MEGREFGRADAXIAL',
@@ -82,6 +83,7 @@ def _get_ch_type_mapping(fro='mne', to='bids'):
                        RESP='resp', GSR='gsr', TEMP='temperature',
                        # NIRS
                        NIRSCWAMPLITUDE='fnirs_cw_amplitude',
+                       NIRSCWOPTICALDENSITY='fnirs_od',
                        NIRS='fnirs_cw_amplitude',
                        # No MEG channels for now (see Notes above)
                        # Many to one mapping
@@ -443,7 +445,7 @@ def _check_datatype(raw, datatype):
         datatype_matches = True
     elif datatype == 'meg' and datatype in raw:
         datatype_matches = True
-    elif datatype == 'nirs' and 'fnirs_cw_amplitude' in raw:
+    elif datatype == 'nirs' and ('fnirs_cw_amplitude' in raw or 'fnirs_od' in raw):
         datatype_matches = True
     elif datatype == 'ieeg':
         ieeg_types = ('seeg', 'ecog', 'dbs')
